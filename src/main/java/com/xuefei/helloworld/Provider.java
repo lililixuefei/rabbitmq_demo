@@ -2,10 +2,9 @@ package com.xuefei.helloworld;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-
+import com.rabbitmq.client.MessageProperties;
+import com.xuefei.utils.RabbitMQUtils;
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 /**
  * @description: 发送者
@@ -16,40 +15,29 @@ public class Provider {
     private final static String QUEUE_NAME = "hello";
 
     public static void main(String[] args) {
-        // 创建连接工厂
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("47.101.156.32");
-        factory.setPort(5672);
-        factory.setVirtualHost("/xuefei");
-        factory.setUsername("xuefei");
-        factory.setPassword("abcd");
-        Connection connection = null;
+        Connection connection = RabbitMQUtils.getConnection();
         Channel channel = null;
         try {
-            // 创建连接对象
-            connection = factory.newConnection();
             // 创建通道
             channel = connection.createChannel();
             // 通道绑定对象
+            // 参数1：队列名称，如果队列不存在会自动创建
+            // 参数2：用来定义队列特性是否要持久化
+            // 参数3：exclusive 是否独占队列 true 独占队列 反之亦然
+            // 参数4：autoDelete：是否在消费完成后自动删除队列 true 删除队列 反之亦然
+            // 参数5：额外附加参数
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             String message = "hello world";
             // 发送消息
-            channel.basicPublish("",QUEUE_NAME,null,message.getBytes());
+            // 参数1：交换机名称
+            // 参数2：队列名称
+            // 参数3：传递消息额外设置(例：MessageProperties.PERSISTENT_TEXT_PLAIN 会持久化消息)
+            // 参数4：消息的具体内容
+            channel.basicPublish("", QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes());
             System.out.println(" [x] Sent '" + message + "'");
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
         }
-        try {
-            channel.close();
-            connection.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }
-
+        RabbitMQUtils.closeChannelAndConnection(channel, connection);
     }
-
 }

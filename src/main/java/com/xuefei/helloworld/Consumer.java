@@ -4,6 +4,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
+import com.xuefei.utils.RabbitMQUtils;
 
 import java.io.IOException;
 
@@ -16,18 +17,9 @@ public class Consumer {
     private final static String QUEUE_NAME = "hello";
 
     public static void main(String[] argv) throws Exception {
-        // 创建连接工厂
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("47.101.156.32");
-        factory.setPort(5672);
-        factory.setVirtualHost("/xuefei");
-        factory.setUsername("xuefei");
-        factory.setPassword("abcd");
-        Connection connection = null;
+        Connection connection = RabbitMQUtils.getConnection();
         Channel channel = null;
         try {
-            // 创建连接对象
-            connection = factory.newConnection();
             // 创建通道
             channel = connection.createChannel();
             // 通道绑定对象
