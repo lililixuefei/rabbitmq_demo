@@ -1,7 +1,9 @@
 # rabbitmq_demo
 消息中间件 -- 学习RabbitMQ
 
-#### 第一种模型（直连）![](/Users/xuefei/Library/Application Support/typora-user-images/image-20200922000215262.png)
+#### 第一种模型（直连）
+
+<img src="https://www.rabbitmq.com/img/tutorials/python-one-overall.png"/>
 
 在上图的模型中，有以下概念：
 
@@ -15,7 +17,7 @@
 
 ​	Work queues，也就称为（Task queues），任务模型。当消息处理比较耗时的时候，可能生产消息的速度会远远大于消息的消费速度。长此以往，消息就会堆积越来越多，无法及时处理。此时可以使用 work 模型：**让多个消费绑定到一个队列，共同消费队列里面的消息。**队列中的消息一旦消费，就会消失，因此任务是不会被重复执行的。
 
-​	<img src="/Users/xuefei/Library/Application Support/typora-user-images/image-20200922000051754.png"  />
+​	                         <img src="https://www.rabbitmq.com/img/tutorials/python-two.png"  />
 
 角色：
 
