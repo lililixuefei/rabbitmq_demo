@@ -42,10 +42,10 @@
             <version>1.18.10</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.junit</groupId>
-            <artifactId>test</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.junit</groupId>-->
+<!--            <artifactId>test</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
 
