@@ -71,3 +71,18 @@ fanout  扇出 也称为广播
 - C1：消费者，其所在队列指定了需要Routing Key为error的消息
 - C2：消费者，其所在队列指定了需要Routing Key为info、error、warning的消息
 
+**2.Routing 之订阅模型-Topic**
+
+​		Topic类型的Exchange与Direct相比，都是可以根据RoutingKey把消息路由到不同的队列，只不过Topic类型Exchange可以让队列绑定在绑定RoutingKey的时候使用通配符！这种模型RoutingKey一般都是由一个或多个单词组成，多个单词之间以“.”分割，例如：item.insert
+
+![](https://www.rabbitmq.com/img/tutorials/python-five.png)
+
+```
+# 通配符
+		*（star）can substitute for exactly one word. 匹配不多不少恰好1个词
+		#（hash）can substitute for zero or more words. 匹配一个或多个词
+# 如
+		audit.#  匹配audit.irs.corporate 或者 audit.irs等
+		audit.*  只能匹配 audit.irs	
+```
+

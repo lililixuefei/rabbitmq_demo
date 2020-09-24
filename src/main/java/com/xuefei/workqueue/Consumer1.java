@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
  * @date: 2020/09/20 22:23
  */
 public class Consumer1 {
+
     private final static String QUEUE_NAME = "work";
 
     public static void main(String[] argv) throws Exception {
