@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: rabbitmq-springboot
+  rabbitmq:
+    addresses: 47.101.156.32
+    port: 5672
+    username: user
+    password: password
+    virtual-host: /xuefei
