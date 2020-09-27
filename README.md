@@ -86,3 +86,11 @@ fanout  扇出 也称为广播
 		audit.*  只能匹配 audit.irs	
 ```
 
+----
+
+#### MQ的应用场景及原理
+
+找到一篇讲的不错的blog，可以看看
+
+https://blog.csdn.net/whoamiyang/article/details/54954780
+
